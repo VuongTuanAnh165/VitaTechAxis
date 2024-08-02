@@ -12,21 +12,19 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends BaseController
 {
     protected $user;
+
     protected $activation;
+
     protected $activityLog;
 
     /**
      * constructor.
-     * @param UserInterface $user
-     * @param ActivationInterface $activation
-     * @param ActivityLogInterface $activityLog
      */
     public function __construct(
         UserInterface $user,
@@ -37,10 +35,10 @@ class UserController extends BaseController
         $this->activation = $activation;
         $this->activityLog = $activityLog;
     }
+
     /**
      * Authenticate the user.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function authenticate(Request $request)
@@ -50,7 +48,7 @@ class UserController extends BaseController
             $credentials = [
                 'email' => $request->email,
                 'password' => $request->password,
-                'role' => $request->role
+                'role' => $request->role,
             ];
             $guard = Common::getAuthGuard($credentials['role']);
             if (Auth::guard($guard)->attempt($credentials)) {
@@ -79,8 +77,9 @@ class UserController extends BaseController
                     $resource = [
                         'user' => $user,
                         'url_prev' => $param['prev'],
-                        'url_verify' => $param['prev']
+                        'url_verify' => $param['prev'],
                     ];
+
                     return $this->renderResponse(Response::HTTP_FORBIDDEN, __('messages.api.response.login.403'), $resource);
                 }
                 $userAgent = $param['userAgent'];
@@ -93,14 +92,17 @@ class UserController extends BaseController
                 $this->activityLog->create($param_activityLog);
                 DB::commit();
                 $resource = [
-                    'url_prev' => $param['prev']
+                    'url_prev' => $param['prev'],
                 ];
+
                 return $this->renderResponse(Response::HTTP_OK, __('messages.api.response.login.200'), $resource);
             }
+
             return $this->renderResponse(Response::HTTP_UNAUTHORIZED, __('messages.api.response.login.401'));
         } catch (Exception $e) {
-            Log::error('[UserController][authenticate] error ' . $e->getMessage());
+            Log::error('[UserController][authenticate] error '.$e->getMessage());
             DB::rollBack();
+
             return $this->renderResponseError($e);
         }
     }
