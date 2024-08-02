@@ -100,7 +100,7 @@ class UserController extends BaseController
 
             return $this->renderResponse(Response::HTTP_UNAUTHORIZED, __('messages.api.response.login.401'));
         } catch (Exception $e) {
-            Log::error('[UserController][authenticate] error '.$e->getMessage());
+            Log::error('[UserController][authenticate] error ' . $e->getMessage());
             DB::rollBack();
 
             return $this->renderResponseError($e);
@@ -109,6 +109,5 @@ class UserController extends BaseController
 
     public function register(Request $request)
     {
-
     }
 }

@@ -51,41 +51,41 @@ class Common
 
         $routeProjectWebHomeIndex = route('project.web.home.index');
         $routeEntityAdmin = route('entity.home');
-        if (! empty($mailTemplate)) {
+        if (!empty($mailTemplate)) {
             $data['titleEmail'] = $mailTemplate->title;
             $data['bodyEmail'] = $mailTemplate->body;
         }
-        if (! empty($data['expired_time'])) {
+        if (!empty($data['expired_time'])) {
             $expired_time = date('Y/m/d H:i:s', strtotime($data['expired_time']));
         }
-        if (! empty($data['user_name'])) {
+        if (!empty($data['user_name'])) {
             $user_name = $data['user_name'];
         }
-        if (! empty($data['activation_code'])) {
+        if (!empty($data['activation_code'])) {
             $activation_code = $data['activation_code'];
         }
-        if (! empty($data['company_name'])) {
+        if (!empty($data['company_name'])) {
             $company_name = $data['company_name'];
         }
-        if (! empty($data['service_name'])) {
+        if (!empty($data['service_name'])) {
             $service_name = $data['service_name'];
         }
-        if (! empty($data['service_type_name'])) {
+        if (!empty($data['service_type_name'])) {
             $service_type_name = $data['service_type_name'];
         }
-        if (! empty($data['password'])) {
+        if (!empty($data['password'])) {
             $password = $data['password'];
         }
-        if (! empty($data['email'])) {
+        if (!empty($data['email'])) {
             $email = $data['email'];
         }
-        if (! empty($data['entity_email'])) {
+        if (!empty($data['entity_email'])) {
             $entity_email = $data['entity_email'];
         }
-        if (! empty($data['entity_name'])) {
+        if (!empty($data['entity_name'])) {
             $entity_name = $data['entity_name'];
         }
-        if (! empty($data['service_field'])) {
+        if (!empty($data['service_field'])) {
             $service_field = $data['service_field'];
         }
 
@@ -114,19 +114,19 @@ class Common
     public static function getValInput($model, $column, $default = null)
     {
         $oldColumn = old($column);
-        if (! is_null($oldColumn) && ! is_array($oldColumn)) {
+        if (!is_null($oldColumn) && !is_array($oldColumn)) {
             return $oldColumn;
         }
 
         if (is_object($model)) {
-            if (is_null($model->{$column}) && ! is_null($default)) {
+            if (is_null($model->{$column}) && !is_null($default)) {
                 return $default;
             }
 
             return $model->{$column};
         }
 
-        if (! is_null($default)) {
+        if (!is_null($default)) {
             return $default;
         }
 
@@ -142,16 +142,16 @@ class Common
     {
         $oldColumn = old($attribute);
 
-        if (! is_null($oldColumn) && ! is_array($oldColumn) && $oldColumn == $valueCheck) {
+        if (!is_null($oldColumn) && !is_array($oldColumn) && $oldColumn == $valueCheck) {
             return 'selected';
         }
 
-        if (is_object($model) && ! is_null($model->{$attribute}) && $model->{$attribute} == $valueCheck) {
+        if (is_object($model) && !is_null($model->{$attribute}) && $model->{$attribute} == $valueCheck) {
 
             return 'selected';
         }
 
-        if (! is_object($model) && is_null($oldColumn) && ! is_null($default) && $default == $valueCheck) {
+        if (!is_object($model) && is_null($oldColumn) && !is_null($default) && $default == $valueCheck) {
 
             return 'selected';
         }
@@ -165,7 +165,7 @@ class Common
     public static function getValCheckBox($model, $attribute, $valueCheck, $default = null, $multipleForm = null)
     {
         $oldColumn = old($attribute);
-        if (! is_null($oldColumn) && ! is_array($oldColumn) && $oldColumn == $valueCheck) {
+        if (!is_null($oldColumn) && !is_array($oldColumn) && $oldColumn == $valueCheck) {
             return 'checked';
         }
 
@@ -193,12 +193,12 @@ class Common
         }
 
         if (is_object($model)) {
-            if (! is_null($model->{$attribute}) && $model->{$attribute} == $valueCheck) {
+            if (!is_null($model->{$attribute}) && $model->{$attribute} == $valueCheck) {
                 return 'checked';
             }
         }
 
-        if (! is_null($default) && $default == $valueCheck) {
+        if (!is_null($default) && $default == $valueCheck) {
             return 'checked';
         }
 
@@ -300,7 +300,7 @@ class Common
      */
     public static function getImagePeople($image)
     {
-        return $image ? asset('storage/'.$image) : asset(IMAGE_PEOPLE_DEFAULT);
+        return $image ? asset('storage/' . $image) : asset(IMAGE_PEOPLE_DEFAULT);
     }
 
     /**
@@ -310,6 +310,6 @@ class Common
      */
     public static function getImage($image)
     {
-        return $image ? asset('storage/'.$image) : asset(IMAGE_DEFAULT);
+        return $image ? asset('storage/' . $image) : asset(IMAGE_DEFAULT);
     }
 }

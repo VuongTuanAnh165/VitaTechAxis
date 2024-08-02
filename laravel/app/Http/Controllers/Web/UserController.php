@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     protected $business;
-
     protected $user;
 
     /**

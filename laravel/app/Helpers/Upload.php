@@ -124,7 +124,8 @@ class Upload
         return $fileDelete;
     }
 
-    public static function deleteFile($path) {
+    public static function deleteFile($path)
+    {
         Storage::disk('public')->delete($path);
     }
 }
