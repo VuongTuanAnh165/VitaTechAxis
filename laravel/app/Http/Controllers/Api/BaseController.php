@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
@@ -15,9 +14,7 @@ class BaseController extends Controller
 
     /**
      * gói kết quả vào phản hồi json.
-     * @param int $code
-     * @param string $message
-     * @param array|null $resource
+     *
      * @return JsonResponse
      */
     // public function wrapResponse(int $code, string $message, ?array $resource = []): JsonResponse
@@ -41,12 +38,13 @@ class BaseController extends Controller
     {
         $result = [
             'status' => $code,
-            'message' => $message
+            'message' => $message,
         ];
 
         if (count($resource)) {
             $result = array_merge($result, ['data' => $resource['data']]);
         }
+
         return response()->json($result, $code);
     }
 
@@ -54,8 +52,9 @@ class BaseController extends Controller
     {
         $result = [
             'status' => $exception->getCode(),
-            'message'    => $exception->getMessage()
+            'message' => $exception->getMessage(),
         ];
+
         return response()->json($result, $exception->getCode());
     }
 }

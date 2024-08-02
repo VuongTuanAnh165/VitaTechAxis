@@ -40,9 +40,10 @@ class IPHelper
     public static function getCountryByIp(String $ip)
     {
         try {
-            $ipdat = @json_decode(file_get_contents(
-                "http://www.geoplugin.net/json.gp?ip=" . $ip));
-            return $ipdat;
+            $ipDat = @json_decode(file_get_contents(
+                "http://www.geoplugin.net/json.gp?ip=" . $ip
+            ));
+            return $ipDat;
         } catch (\Exception $exception) {
             Log::error('[LogAccessListener][handle] error: ' . $exception->getMessage());
         }
