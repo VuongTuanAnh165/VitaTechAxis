@@ -11,6 +11,20 @@
                 $(".icon-customize").removeClass("side-menu__icon").addClass("menu__icon");
                 $(".title-customize").removeClass("side-menu__title").addClass("menu__title");
             }
+            if ($(".menu-customize").hasClass("menu-customize-active")) {
+                if ($(".menu-customize").hasClass("side-menu")) {
+                    $(".menu-customize").addClass("side-menu--active").removeClass("menu--active")
+                } else if ($(".menu-customize").hasClass("menu")) {
+                    $(".menu-customize").removeClass("side-menu--active").addClass("menu--active");
+                }
+            }
+            if ($(".menu-customize").hasClass("menu-customize-open")) {
+                if ($(".menu-customize").hasClass("side-menu")) {
+                    $(".menu-customize").addClass("side-menu__sub-open").removeClass("menu__sub-open")
+                } else if ($(".menu-customize").hasClass("menu")) {
+                    $(".menu-customize").removeClass("side-menu__sub-open").addClass("menu__sub-open");
+                }
+            }
         }
         resposiveNav()
         $(window).resize(function() {

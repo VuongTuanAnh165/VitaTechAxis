@@ -3,11 +3,13 @@
 namespace App\Helpers;
 
 use App\Models\MailTemplate;
+use Illuminate\Support\Facades\Route;
 
 class Common
 {
     /**
      * check status
+     *
      * @return string
      */
     public static function getAuthGuard($role)
@@ -25,8 +27,7 @@ class Common
     }
 
     /** get template email by name
-     * @param $templateName
-     * @param null $data
+     * @param  null  $data
      * @return array|mixed|null
      */
     public static function getTemplateEmail($templateName, $data = null)
@@ -55,7 +56,7 @@ class Common
             $data['bodyEmail'] = $mailTemplate->body;
         }
         if (!empty($data['expired_time'])) {
-            $expired_time = date("Y/m/d H:i:s", strtotime($data['expired_time']));
+            $expired_time = date('Y/m/d H:i:s', strtotime($data['expired_time']));
         }
         if (!empty($data['user_name'])) {
             $user_name = $data['user_name'];
@@ -101,15 +102,13 @@ class Common
         $data['bodyEmail'] = str_replace('{{ENTITY_EMAIL}}', $entity_email, $data['bodyEmail']);
         $data['bodyEmail'] = str_replace('{{ENTITY_NAME}}', $entity_name, $data['bodyEmail']);
         $data['bodyEmail'] = str_replace('{{SERVICE_FIELD}}', $service_field, $data['bodyEmail']);
+
         return $data;
     }
 
     /**
      * Get value input.
      *
-     * @param $model
-     * @param $column
-     * @param $default
      * @return mixed|string
      */
     public static function getValInput($model, $column, $default = null)
@@ -123,6 +122,7 @@ class Common
             if (is_null($model->{$column}) && !is_null($default)) {
                 return $default;
             }
+
             return $model->{$column};
         }
 
@@ -136,10 +136,6 @@ class Common
     /**
      * Get value select box.
      *
-     * @param $model
-     * @param $attribute
-     * @param $valueCheck
-     * @param $default
      * @return string|void
      */
     public static function getValSelect($model, $attribute, $valueCheck, $default = null)
@@ -164,11 +160,6 @@ class Common
     /**
      * Get value checkbox.
      *
-     * @param $model
-     * @param $attribute
-     * @param $valueCheck
-     * @param $default
-     * @param $multipleForm
      * @return string
      */
     public static function getValCheckBox($model, $attribute, $valueCheck, $default = null, $multipleForm = null)
@@ -178,7 +169,7 @@ class Common
             return 'checked';
         }
 
-        if (is_array($oldColumn) && key_exists($multipleForm, $oldColumn)) {
+        if (is_array($oldColumn) && array_key_exists($multipleForm, $oldColumn)) {
 
             if (is_array($oldColumn[$multipleForm])) {
                 foreach ($oldColumn[$multipleForm] as $value) {
@@ -212,5 +203,113 @@ class Common
         }
 
         return '';
+    }
+
+    /**
+     * Convert special characters.
+     *
+     * @param  string  $string
+     * @return string
+     */
+    public static function escapeLike($string)
+    {
+        $arySearch = ['\\', '%', '_'];
+        $aryReplace = ['\\\\', '\%', '\_'];
+
+        return str_replace($arySearch, $aryReplace, $string);
+    }
+
+    /**
+     * get route name current
+     *
+     * @return string
+     */
+    public static function getCurrentRouteName()
+    {
+        return Route::currentRouteName();
+    }
+
+    /**
+     * check route active
+     *
+     * @param $arr_route type of array()
+     * @return bool
+     */
+    public static function checkRouteActive($arr_route)
+    {
+        if (in_array(self::getCurrentRouteName(), $arr_route)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * check route active
+     *
+     * @param $arr_route type of array(array())
+     * @return bool
+     */
+    public static function checkRouteActiveParent($arr_route)
+    {
+        foreach ($arr_route as $item) {
+            if (self::checkRouteActive($item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * check class active admin
+     *
+     * @param $arr_route type of array()
+     * @param $class_name type of const define
+     * @return ADMIN_ASIDE_ACTIVE or null
+     */
+    public static function asideActive($arr_route, $class_name)
+    {
+        if (self::checkRouteActive($arr_route)) {
+            return $class_name;
+        }
+
+        return '';
+    }
+
+    /**
+     * check class active admin
+     *
+     * @param $arr_route type of array(array())
+     * @param $class_name type of const define
+     * @return ADMIN_ASIDE_ACTIVE or null
+     */
+    public static function asideActiveParent($arr_route, $class_name)
+    {
+        if (self::checkRouteActiveParent($arr_route)) {
+            return $class_name;
+        }
+
+        return '';
+    }
+
+    /**
+     * get link image people
+     *
+     * @return url
+     */
+    public static function getImagePeople($image)
+    {
+        return $image ? asset('storage/' . $image) : asset(IMAGE_PEOPLE_DEFAULT);
+    }
+
+    /**
+     * get link image
+     *
+     * @return url
+     */
+    public static function getImage($image)
+    {
+        return $image ? asset('storage/' . $image) : asset(IMAGE_DEFAULT);
     }
 }
