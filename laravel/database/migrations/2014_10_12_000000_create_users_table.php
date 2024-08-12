@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('timezone')->nullable(); // Múi giờ
             $table->string('language')->nullable(); // Ngôn ngữ
             $table->string('currency')->nullable(); // Đơn vị tiền tệ
-            $table->string('status')->default('active'); // Trạng thái
+            $table->integer('status')->default(ACTIVE); // Trạng thái
             $table->timestamp('blocked_at')->nullable(); // Thời điểm bị khóa
             $table->text('block_reason')->nullable(); // Lý do bị khóa
             $table->rememberToken(); // Token ghi nhớ đăng nhập
