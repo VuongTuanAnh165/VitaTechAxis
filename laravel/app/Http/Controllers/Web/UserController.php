@@ -7,6 +7,7 @@ use App\Repositories\Interfaces\BusinessInterface;
 use App\Repositories\Interfaces\UserInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -32,11 +33,34 @@ class UserController extends Controller
     public function login()
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('user.index');
+            return redirect()->route('admin.user.index');
         }
         $business = $this->business->show();
 
         return view('auth.index', compact('business'));
+    }
+
+    /**
+     * authenticate
+     * @param Request $request
+     * @return View
+     */
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->only([
+            'email',
+            'password',        
+        ]);
+        $credentials['role'] = ROLE_ADMIN;
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('admin.user.index')->with([
+                'success' => __("messages.web.auth.success"),
+            ]);
+        }
+        return redirect()->back()->with([
+            'error' => __("messages.web.auth.error"),
+        ]);
     }
 
     /**

@@ -22,7 +22,9 @@ return [
             'null' => 'Không có dữ liệu'
         ],
         "auth" => [
-            "login" => "Đăng nhập"
+            "login" => "Đăng nhập",
+            "success" => "Đăng nhập thành công",
+            "error" => "Tài khoản hoặc mật khổng không đúng"
         ],
         "home" => [
             "title" => "Trang chủ"
@@ -32,6 +34,11 @@ return [
             "placeholder" => [
                 "search" => "Tên khách hàng"
             ]
+        ],
+        "file" => [
+            TYPE_FILE_IMAGE => "Hình ảnh",
+            TYPE_FILE_VIDEO => "Video",
+            TYPE_FILE_DOCUMENT => "Tài liệu"
         ]
     ]
 ];

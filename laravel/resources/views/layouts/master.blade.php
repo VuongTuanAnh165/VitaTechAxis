@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="{{ $_COOKIE['mode'] ?? 'light' }}">
 <!-- BEGIN: Head -->
+
 <head>
     <meta charset="utf-8">
     <link href="dist/images/logo.svg" rel="shortcut icon">
@@ -14,6 +15,7 @@
     <title>@yield('title')</title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ asset('templates/admin/dist/css/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}" />
     @yield('addcss')
     <!-- END: CSS Assets-->
 </head>
@@ -34,7 +36,7 @@
             <a href="javascript:;" class="mobile-menu-toggler">
                 <i data-lucide="x-circle" class="w-8 h-8 text-white transform -rotate-90"></i>
             </a>
-            <ul class="scrollable__content py-2">
+            <ul class="py-2 scrollable__content">
                 @include('layouts.nav')
             </ul>
         </div>
@@ -56,17 +58,25 @@
         <!-- END: Content -->
     </div>
     <!-- BEGIN: Dark Mode Switcher-->
-    <div class="dark-mode-switcher cursor-pointer shadow-md fixed bottom-0 right-0 box dark:bg-dark-2 border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10">
+    <div
+        class="fixed bottom-0 right-0 z-50 flex items-center justify-center w-40 h-12 mb-10 mr-10 border rounded-full shadow-md cursor-pointer dark-mode-switcher box dark:bg-dark-2">
         <div class="mr-4 text-gray-700 dark:text-gray-300 dark-mode"><i data-lucide="moon"></i></div>
-        <div class="dark-mode-switcher__toggle border {{ $_COOKIE['mode'] == 'dark' ? 'dark-mode-switcher__toggle--active' : '' }}"></div>
+        <div
+            class="dark-mode-switcher__toggle border {{ $_COOKIE['mode'] == 'dark' ? 'dark-mode-switcher__toggle--active' : '' }}">
+        </div>
     </div>
     <!-- END: Dark Mode Switcher-->
 
     <!-- BEGIN: JS Assets-->
     <script src="{{ asset('templates/admin/dist/js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('toastr/toastr.min.js') }}"></script>
     @include('components.scripts.common')
     @yield('addjs')
+    @if (session('success') || session('error'))
+        @include('components.toastr.index')
+    @endif
     <!-- END: JS Assets-->
 </body>
 

@@ -41,7 +41,4 @@
 </div>
 @stop
 @section('addjs')
-@if (session('success') || session('error'))
-    @include('components.toastr.index')
-@endif
 @stop

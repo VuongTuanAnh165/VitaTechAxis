@@ -19,6 +19,7 @@
     @if (session('success'))
         Command: toastr["success"]("Success", "{{ session('success') }}")
     @elseif (session('error'))
+    console.log(23243)
         Command: toastr["error"]("Error", "{{ session('error') }}")
     @elseif (session('warning'))
         Command: toastr["warning"]("Warning", "{{ session('warning') }}")

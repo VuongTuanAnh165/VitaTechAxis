@@ -20,5 +20,8 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/login', [UserController::class, 'login'])->name('admin.user.login');
-    Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
+    Route::post('/authenticate', [UserController::class, 'authenticate'])->name('admin.user.authenticate');
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
+    });
 });

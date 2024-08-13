@@ -8,3 +8,6 @@ defined('INACTIVE') or define('INACTIVE', 0); // Inactive
 defined('PAGINATION_NUMBER') or define('PAGINATION_NUMBER', 9); // Default number of rows per page
 defined('IMAGE_PEOPLE_DEFAULT') or define('IMAGE_PEOPLE_DEFAULT', 'images/people_default.jpg'); // Default image for people
 defined('IMAGE_DEFAULT') or define('IMAGE_DEFAULT', 'images/default.jpg'); // Default image
+defined('TYPE_FILE_IMAGE') or define('TYPE_FILE_IMAGE', 1); // Type file: image
+defined('TYPE_FILE_VIDEO') or define('TYPE_FILE_VIDEO', 2); // Type file: video
+defined('TYPE_FILE_DOCUMENT') or define('TYPE_FILE_DOCUMENT', 1); // Type file: document
