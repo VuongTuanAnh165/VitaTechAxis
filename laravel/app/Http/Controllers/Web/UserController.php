@@ -61,6 +61,7 @@ class UserController extends Controller
         return redirect()->back()->with([
             'error' => __("messages.web.auth.error"),
         ]);
+        //1111
     }
 
     /**
@@ -73,5 +74,14 @@ class UserController extends Controller
         $users = $this->user->getUserByRoleWithSearch(ROLE_CUSTOMER, $request);
 
         return view('user.index', compact('users'));
+    }
+
+    public function test(Request $request)
+    {
+        //123
+        //456
+        //789
+        //000
+        //999
     }
 }
