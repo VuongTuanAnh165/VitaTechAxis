@@ -56,5 +56,6 @@ class BaseController extends Controller
         ];
 
         return response()->json($result, $exception->getCode());
+        //dsadasdsadas
     }
 }
