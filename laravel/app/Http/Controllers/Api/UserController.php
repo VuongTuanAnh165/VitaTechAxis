@@ -109,5 +109,11 @@ class UserController extends BaseController
 
     public function register(Request $request)
     {
+        //sdasd
+    }
+
+    public function register1(Request $request)
+    {
+        //sdasd
     }
 }
