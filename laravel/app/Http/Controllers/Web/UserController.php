@@ -61,7 +61,7 @@ class UserController extends Controller
         return redirect()->back()->with([
             'error' => __("messages.web.auth.error"),
         ]);
-        //1111
+        //22222
     }
 
     /**
@@ -76,12 +76,5 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
-    public function test(Request $request)
-    {
-        //123
-        //456
-        //789
-        //000
-        //999
-    }
+
 }
