@@ -13,13 +13,15 @@ const footerHeight = computed(() => {
 const platform = Capacitor.getPlatform()
 
 const { checkUpdateApp } = useAppChange()
+const { appUrlOpen } = useDeepLinks()
 
 const callAppAddListeners = async () => {
   if (platform !== 'web') {
-    await checkUpdateApp()
+    // await checkUpdateApp()
+    appUrlOpen()
   }
 }
-// await callAppAddListeners()
+await callAppAddListeners()
 
 const storeVersion = useVersionStore()
 const { updateApp } = storeToRefs(storeVersion)
