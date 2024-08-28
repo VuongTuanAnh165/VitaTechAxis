@@ -1,0 +1,7 @@
+Định nghĩa các interface
+VD: 
+export interface Product{
+    id: string;
+    name: string;
+    price: number
+}
