@@ -106,8 +106,9 @@ class UserController extends BaseController
             return $this->renderResponseError($e);
         }
     }
-
-    public function register(Request $request)
-    {
+    public function  testb() {
+       //sadasdasdas 
+       // sadasdasdas
+       //sadasdasd
     }
 }
